@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import initializeDB from '../database';
 
 const PlantGrowthRecords = () => {
+  const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      const db = await initializeDB();
+      const res = await db.all('SELECT * FROM plant_records');
+      setRecords(res);
+      setLoading(false);
+    };
+    fetchRecords();
+  }, []);
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-4xl font-bold text-center my-6">Plant Growth Records</h1>
@@ -29,7 +42,24 @@ const PlantGrowthRecords = () => {
           </tr>
         </thead>
         <tbody>
-          {/* Data rows will be dynamically generated here */}
+          {loading ? (
+            <tr><td>Loading...</td></tr>
+          ) : (
+            records.length > 0 ? (
+              records.map(record => (
+                <tr key={record.id}>
+                  <td>{record.id}</td>
+                  <td>{record.name}</td>
+                  <td>{record.status}</td>
+                  <td>{record.planted_date}</td>
+                  <td>{record.species}</td>
+                  <td><img src={record.image} alt="Plant" /></td>
+                </tr>
+              ))
+            ) : (
+              <tr><td colSpan="6">No record found</td></tr>
+            )
+          )}
         </tbody>
       </table>
     </div>
