@@ -45,13 +45,13 @@ const PlantGrowthRecords = () => {
         </thead>
         <tbody>
           {records.length > 0 ? records.map(record => (
-            <tr key={record.id}>
+            <tr key={record.id} onClick={() => showDetailsModal(record)}>
               <td>{record.id}</td>
               <td>{record.name}</td>
               <td>{record.status}</td>
               <td>{record.plantedDate}</td>
               <td>{record.species}</td>
-              <td><img src={record.image} alt="Plant" /></td>
+              <td><img src={record.image || 'path/to/default/image.png'} alt="Plant" /></td>
             </tr>
           )) : <tr><td colSpan="6" className="text-center">No record found</td></tr>}
         </tbody>
