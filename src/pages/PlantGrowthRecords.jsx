@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { openDB, fetchRecords, addRecord } from '../utils/IndexedDBUtil';
 
 const PlantGrowthRecords = () => {
+  const [records, setRecords] = useState([]);
+  const [db, setDb] = useState(null);
+
+  useEffect(() => {
+    openDB().then(db => {
+      setDb(db);
+      fetchRecords(db).then(data => {
+        setRecords(data);
+      });
+    });
+  }, []);
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-4xl font-bold text-center my-6">Plant Growth Records</h1>
@@ -29,7 +41,16 @@ const PlantGrowthRecords = () => {
           </tr>
         </thead>
         <tbody>
-          {/* Data rows will be dynamically generated here */}
+          {records.length > 0 ? records.map(record => (
+            <tr key={record.id}>
+              <td>{record.id}</td>
+              <td>{record.name}</td>
+              <td>{record.status}</td>
+              <td>{record.plantedDate}</td>
+              <td>{record.species}</td>
+              <td><img src={record.image} alt="Plant" /></td>
+            </tr>
+          )) : <tr><td colSpan="6" className="text-center">No record found</td></tr>}
         </tbody>
       </table>
     </div>
