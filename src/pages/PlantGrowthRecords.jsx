@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { openDB, fetchRecords, addRecord } from '../utils/IndexedDBUtil';
+import AddRecordForm from '../components/AddRecordForm';
 
 const PlantGrowthRecords = () => {
   const [records, setRecords] = useState([]);
   const [db, setDb] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     openDB().then(db => {
@@ -16,7 +18,8 @@ const PlantGrowthRecords = () => {
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-4xl font-bold text-center my-6">Plant Growth Records</h1>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => console.log('Add New Plant Record')}>Add New Plant Record</button>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setShowForm(true)}>Add New Plant Record</button>
+      {showForm && <AddRecordForm db={db} onClose={(refresh) => { setShowForm(false); if (refresh) fetchRecords(db).then(data => setRecords(data)); }} />}
       <table className="min-w-full leading-normal mt-6">
         <thead>
           <tr>
