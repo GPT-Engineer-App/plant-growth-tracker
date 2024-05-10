@@ -20,9 +20,9 @@ const AddRecordForm = ({ db, onClose }) => {
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
       <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <h3 className="text-lg leading-6 font-medium text-gray-900">Add New Plant Record</h3>
-        <input type="text" name="id" placeholder="Unique ID" onChange={handleChange} value={formData.id} />
-        <input type="text" name="name" placeholder="Name" onChange={handleChange} value={formData.name} />
-        <select name="status" onChange={handleChange} value={formData.status}>
+        <input type="text" name="id" placeholder="Unique ID" onChange={handleChange} value={formData.id} className="mb-4 border border-gray-300 shadow" />
+        <input type="text" name="name" placeholder="Name" onChange={handleChange} value={formData.name} className="mb-4 border border-gray-300 shadow" />
+        <select name="status" onChange={handleChange} value={formData.status} className="mb-4 border border-gray-300 shadow">
           <option value="">Select Status</option>
           <option value="Germinated">Germinated</option>
           <option value="Two Leaf Stage">Two Leaf Stage</option>
@@ -31,15 +31,15 @@ const AddRecordForm = ({ db, onClose }) => {
           <option value="Dead">Dead</option>
           <option value="Transplanted">Transplanted</option>
         </select>
-        <input type="date" name="plantedDate" onChange={handleChange} value={formData.plantedDate} />
-        <input type="time" name="time" onChange={handleChange} value={formData.time} />
-        <input type="text" name="species" placeholder="Species" onChange={handleChange} value={formData.species} />
-        <input type="text" name="family" placeholder="Family" onChange={handleChange} value={formData.family} />
-        <input type="file" name="image" onChange={handleChange} />
+        <input type="date" name="plantedDate" onChange={handleChange} value={formData.plantedDate} className="mb-4 border border-gray-300 shadow" />
+        <input type="time" name="time" onChange={handleChange} value={formData.time} className="mb-4 border border-gray-300 shadow" />
+        <input type="text" name="species" placeholder="Species" onChange={handleChange} value={formData.species} className="mb-4 border border-gray-300 shadow" />
+        <input type="text" name="family" placeholder="Family" onChange={handleChange} value={formData.family} className="mb-4 border border-gray-300 shadow" />
+        <input type="file" name="image" onChange={handleChange} className="mb-4 border border-gray-300 shadow" />
         <div className="mt-4">
-          <button onClick={handleSave} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
-          <button onClick={() => setFormData({})} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">Reset</button>
-          <button onClick={() => onClose(false)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">Close</button>
+          <button onClick={handleSave} className="bg-blue-500 hover:bg-blue-600 shadow-lg text-white font-bold py-2 px-4 rounded">Save</button>
+          <button onClick={() => setFormData({})} className="bg-gray-500 hover:bg-gray-600 shadow-lg text-white font-bold py-2 px-4 rounded ml-2">Reset</button>
+          <button onClick={() => onClose(false)} className="bg-red-500 hover:bg-red-600 shadow-lg text-white font-bold py-2 px-4 rounded ml-2">Close</button>
         </div>
       </div>
     </div>
