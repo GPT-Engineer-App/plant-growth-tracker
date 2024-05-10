@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 
 const PlantGrowthRecords = () => {
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-4xl font-bold text-center my-6">Plant Growth Records</h1>
-      <Button variant="primary" onClick={() => console.log('Add New Plant Record')}>Add New Plant Record</Button>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => console.log('Add New Plant Record')}>Add New Plant Record</button>
       <table className="min-w-full leading-normal mt-6">
         <thead>
           <tr>
